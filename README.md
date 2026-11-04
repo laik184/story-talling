@@ -8,4 +8,3 @@ Install: python -m pip install -r requirements.txt
 Set PYTHONPATH to C:\factoholic\14_mcp_server, then run: python -m factoholic_mcp --transport stdio
 
 The server makes no model or paid API calls. It exposes stdio only and creates no HTTP listener, public endpoint, or tunnel. Corpus and database files are not included.
-
