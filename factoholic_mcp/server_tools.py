@@ -1,4 +1,4 @@
-"""MCP entry point: stdio for local clients, authenticated HTTPS for remote clients."""
+"""MCP tool registration for the local stdio server."""
 from __future__ import annotations
 
 import argparse
@@ -141,5 +141,6 @@ def create_server(service: StorytellingService | None = None) -> MCPServer:
         ))
 
     return server
+
 
 
