@@ -1,10 +1,9 @@
-# FactoHolic Storytelling MCP
+# FactoHolic MCP
 
-Local stdio adapter exposing seven read-only storytelling tools.
+Local stdio MCP server and its deterministic corpus-search, evidence, profile-validation, and Writer DNA modules. Runtime corpus files and SQLite indexes are intentionally not included; place this `script_dna` folder inside the existing `C:\factoholic` workspace, which provides `scripts/` and the local indexes.
 
-Run inside the existing C:\factoholic workspace with Python 3.11 or newer. The adapter imports local engine modules from 02_research_engine and 04_creative_engine; those data and engine files are not included in this repository.
+## Run locally
 
-Install: python -m pip install -r requirements.txt
-Set PYTHONPATH to C:\factoholic\14_mcp_server, then run: python -m factoholic_mcp --transport stdio
+From `C:\factoholic\script_dna`, install `requirements.txt` and run `python mcp_server.py`. The server uses stdio only and does not start a public HTTP endpoint or tunnel. Set `PYTHONPATH` to the `script_dna` folder when launching it from an MCP client.
 
-The server makes no model or paid API calls. It exposes stdio only and creates no HTTP listener, public endpoint, or tunnel. Corpus and database files are not included.
+The corpus and Writer DNA databases are maintained by the local FactoHolic workspace. Do not commit transcript files, SQLite databases, generated evidence, or reports to this repository.

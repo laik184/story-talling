@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "FactoHolic Writer DNA Record",
+  "type": "object",
+  "required": ["dna_id", "state", "category", "source", "writing_function", "generic_template", "slots", "topic_fit", "language_register", "humor_emotional_function", "originality_risk", "review_status", "version", "created_at", "schema_version"],
+  "properties": {
+    "dna_id": {"type": "string", "pattern": "^WDNA_[0-9a-f]{20}$"},
+    "schema_version": {"const": "1.0.0"},
+    "state": {"enum": ["A", "B", "C", "D"]},
+    "category": {"enum": ["hooks", "language", "humor", "story", "ending"]},
+    "source": {"type": "object", "required": ["transcript_id", "relative_path", "sha256", "caption_ids", "timestamps", "excerpt"], "properties": {"transcript_id": {"type": "string"}, "relative_path": {"type": "string"}, "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}, "caption_ids": {"type": "array", "minItems": 1, "items": {"type": "string"}}, "timestamps": {"type": "array", "minItems": 1, "items": {"type": "string"}}, "excerpt": {"type": "string", "maxLength": 220}}},
+    "writing_function": {"type": "string"},
+    "generic_template": {"type": "string"},
+    "slots": {"type": "array", "items": {"type": "string"}},
+    "topic_fit": {"type": "object", "properties": {"works_when": {"type": "array", "items": {"type": "string"}}, "avoid_when": {"type": "array", "items": {"type": "string"}}}},
+    "language_register": {"type": "string"},
+    "humor_emotional_function": {"type": "string"},
+    "originality_risk": {"type": "string"},
+    "review_status": {"enum": ["source_only", "pending", "approved", "rejected", "needs_revision", "adaptation"]},
+    "version": {"type": "integer", "minimum": 1},
+    "created_at": {"type": "string"},
+    "source_record_id": {"type": "string"},
+    "source_candidate_id": {"type": "string"},
+    "source_template_id": {"type": "string"},
+    "fact_claim_ids": {"type": "array", "items": {"type": "string"}}
+  },
+  "additionalProperties": true
+}

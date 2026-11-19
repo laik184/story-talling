@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://factoholic.local/schemas/dynamic-script-dna/2.2.0",
+  "title": "FactoHolic Dynamic Script DNA",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "script_id", "source_sha256", "main_topic", "central_question", "subtopics", "research_structure", "hook_mechanisms", "humor_and_language", "narrative_beats", "logical_connections", "dna_elements", "reveal_callbacks", "ending_payoffs", "pacing_observations", "additional_techniques", "timeline", "transcription_warnings"],
+  "properties": {
+    "schema_version": {"const": "2.2.0"},
+    "script_id": {"type": "string", "minLength": 1},
+    "source_sha256": {"type": "string", "pattern": "^[a-fA-F0-9]{64}$"},
+    "main_topic": {"$ref": "#/$defs/claim"},
+    "central_question": {"anyOf": [{"$ref": "#/$defs/claim"}, {"type": "null"}]},
+    "subtopics": {"type": "array", "items": {"type": "object", "additionalProperties": false, "required": ["topic", "explanation_points"], "properties": {"topic": {"$ref": "#/$defs/claim"}, "explanation_points": {"type": "array", "items": {"$ref": "#/$defs/claim"}}}}},
+    "research_structure": {"type": "object", "additionalProperties": false, "required": ["horizontal_coverage", "vertical_depth", "causal_relationships"], "properties": {"horizontal_coverage": {"type": "array", "items": {"$ref": "#/$defs/claim"}}, "vertical_depth": {"type": "array", "items": {"$ref": "#/$defs/claim"}}, "causal_relationships": {"type": "array", "items": {"$ref": "#/$defs/claim"}}}},
+    "hook_mechanisms": {"type": "array", "items": {"$ref": "#/$defs/claim"}},
+    "humor_and_language": {"type": "array", "items": {"$ref": "#/$defs/claim"}},
+    "narrative_beats": {"type": "array", "items": {"$ref": "#/$defs/beat"}},
+    "logical_connections": {"type": "array", "items": {"$ref": "#/$defs/connection"}},
+    "dna_elements": {"type": "array", "items": {"$ref": "#/$defs/element"}},
+    "reveal_callbacks": {"type": "array", "items": {"$ref": "#/$defs/claim"}},
+    "ending_payoffs": {"type": "array", "items": {"$ref": "#/$defs/claim"}},
+    "pacing_observations": {"type": "array", "items": {"$ref": "#/$defs/claim"}},
+    "additional_techniques": {"type": "array", "items": {"$ref": "#/$defs/claim"}},
+    "timeline": {"type": "array", "items": {"$ref": "#/$defs/timeline_entry"}},
+    "transcription_warnings": {"type": "array", "items": {"$ref": "#/$defs/claim"}}
+  },
+  "$defs": {
+    "claim": {"type": "object", "additionalProperties": false, "required": ["text", "caption_ids", "excerpt", "confidence"], "properties": {"text": {"type": "string", "minLength": 1}, "caption_ids": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}, "uniqueItems": true}, "excerpt": {"type": "string", "minLength": 1}, "confidence": {"enum": ["low", "medium", "high"]}}},
+    "boundary": {"type": "object", "additionalProperties": false, "required": ["start_caption_id", "end_caption_id", "status"], "properties": {"start_caption_id": {"type": "string"}, "end_caption_id": {"type": "string"}, "status": {"const": "inferred_from_caption_span"}}},
+    "beat": {"type": "object", "additionalProperties": false, "required": ["beat_id", "function", "boundary", "transition_to_next"], "properties": {"beat_id": {"type": "string", "minLength": 1}, "function": {"$ref": "#/$defs/claim"}, "boundary": {"$ref": "#/$defs/boundary"}, "transition_to_next": {"anyOf": [{"$ref": "#/$defs/claim"}, {"type": "null"}]}}},
+    "element": {"type": "object", "additionalProperties": false, "required": ["element_id", "name", "category", "claim", "identification_reason", "boundary"], "properties": {"element_id": {"type": "string", "minLength": 1}, "name": {"type": "string", "minLength": 1}, "category": {"type": "string", "minLength": 1}, "claim": {"$ref": "#/$defs/claim"}, "identification_reason": {"$ref": "#/$defs/claim"}, "boundary": {"$ref": "#/$defs/boundary"}}},
+    "connection": {"type": "object", "additionalProperties": false, "required": ["from_beat_id", "to_beat_id", "claim"], "properties": {"from_beat_id": {"type": "string"}, "to_beat_id": {"type": "string"}, "claim": {"$ref": "#/$defs/claim"}}},
+    "timeline_entry": {"type": "object", "additionalProperties": false, "required": ["target_type", "target_id", "start_caption_id", "end_caption_id", "boundary_status"], "properties": {"target_type": {"enum": ["narrative_beat", "dna_element"]}, "target_id": {"type": "string"}, "start_caption_id": {"type": "string"}, "end_caption_id": {"type": "string"}, "boundary_status": {"const": "inferred_from_caption_span"}}}
+  }
+}
