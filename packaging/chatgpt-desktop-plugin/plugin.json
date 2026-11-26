@@ -1,0 +1,24 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "factoholic-script-engine",
+  "version": "0.1.0",
+  "description": "Local transcript search and evidence-based script workflow for GeoAxis.",
+  "author": {
+    "name": "GeoAxis"
+  },
+  "license": "MIT",
+  "keywords": ["MCP", "transcripts", "scriptwriting", "research", "Hindi", "Hinglish"],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "FactoHolic Script Engine",
+        "shortDescription": "Local transcript MCP tools",
+        "longDescription": "Desktop-only local MCP tools for transcript search, evidence checking, Script DNA analysis and script workflow. The transcript folder and editable Master Instructions remain on this computer.",
+        "developerName": "GeoAxis",
+        "category": "Productivity",
+        "capabilities": [],
+        "defaultPrompt": "Use FactoHolic Script Engine for the requested local transcript research or writing workflow."
+      }
+    }
+  }
+}

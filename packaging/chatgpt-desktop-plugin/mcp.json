@@ -1,0 +1,16 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/mcp.schema.json",
+  "mcpServers": {
+    "factoholic-script-engine": {
+      "type": "stdio",
+      "command": "C:\\factoholic\\.venv\\Scripts\\python.exe",
+      "args": ["-m", "factoholic_script_engine.server"],
+      "cwd": "${PLUGIN_ROOT}/server",
+      "env": {
+        "FACTOHOLIC_DATASET_DIR": "C:\\factoholic\\scripts",
+        "FACTOHOLIC_STATE_DIR": "C:\\Users\\Administrator\\AppData\\Local\\factoholic-script-engine",
+        "FACTOHOLIC_MASTER_INSTRUCTIONS": "C:\\factoholic\\MASTER_INSTRUCTIONS.md"
+      }
+    }
+  }
+}

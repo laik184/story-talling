@@ -1,0 +1,25 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "factoholic-script-engine"
+version = "0.1.0"
+description = "Local-first MCP reference corpus and script workflow for GeoAxis"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = ["mcp[cli]>=2.2,<3"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.3", "pytest-asyncio>=0.25"]
+
+[project.scripts]
+factoholic-script-engine = "factoholic_script_engine.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["factoholic_script_engine"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"

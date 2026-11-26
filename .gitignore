@@ -8,3 +8,11 @@ annotations/
 evidence/
 *_REPORT.md
 *_EXECUTION*.md
+.factoholic-data/
+/.pytest_cache/
+/dist/
+MASTER_INSTRUCTIONS.md
+*.db
+*.sqlite3
+*.mcpb
+*.zip

@@ -1,0 +1,96 @@
+{
+  "manifest_version": "0.4",
+  "name": "factoholic-script-engine",
+  "display_name": "FactoHolic Script Engine",
+  "version": "0.1.0",
+  "description": "Local reference search, transcript reading, and script workflow for GeoAxis.",
+  "long_description": "A local-first MCP server for an operator-selected transcript folder. The corpus is not included in this bundle. It uses a local SQLite index, exposes evidence and workflow tools, and does not call an external model API.",
+  "author": {
+    "name": "GeoAxis"
+  },
+  "server": {
+    "type": "uv",
+    "entry_point": "mcpb_entry.py",
+    "mcp_config": {
+      "command": "uv",
+      "args": ["run", "--directory", "${__dirname}", "mcpb_entry.py"],
+      "env": {
+        "FACTOHOLIC_DATASET_DIR": "${user_config.dataset_dir}",
+        "FACTOHOLIC_STATE_DIR": "${user_config.state_dir}",
+        "FACTOHOLIC_MASTER_INSTRUCTIONS": "${user_config.instructions_file}",
+        "FACTOHOLIC_WORKFLOW_CONTRACT": "${__dirname}/WORKFLOW_CONTRACT.md",
+        "FACTOHOLIC_DATASET_CREATOR": "${user_config.dataset_creator}"
+      }
+    }
+  },
+  "tools": [
+    {"name": "get_instructions", "description": "Load the current editable Master Instructions and content hash."},
+    {"name": "get_workflow_contract", "description": "Read the technical workflow contract."},
+    {"name": "get_dataset_overview", "description": "Report corpus file counts, parse status, and coverage."},
+    {"name": "refresh_dataset_index", "description": "Incrementally index added or modified Markdown transcripts."},
+    {"name": "search_references", "description": "Search the full indexed transcript corpus with filters and pagination."},
+    {"name": "read_transcript", "description": "Read a complete indexed Markdown transcript with paging."},
+    {"name": "get_script_dna", "description": "Return existing analysis separately from caption evidence."},
+    {"name": "search_language_patterns", "description": "Search real caption lines for language evidence."},
+    {"name": "search_humor_patterns", "description": "Search caption evidence only for creator-attributed humor references."},
+    {"name": "save_reference_analysis", "description": "Store analysis after exact caption evidence checks."},
+    {"name": "get_language_bank", "description": "Retrieve evidence-matched language patterns with provenance."},
+    {"name": "start_corpus_learning_batch", "description": "Start a fresh full-corpus cycle for an outline or script request."},
+    {"name": "get_corpus_learning_status", "description": "Report delivery, AI inspection, analysis, validation, pending and failure counts separately."},
+    {"name": "get_next_corpus_learning_batch", "description": "Deliver actual transcript contents in a resumable context-limited batch."},
+    {"name": "pause_corpus_learning_batch", "description": "Checkpoint an active full-corpus reading cycle."},
+    {"name": "resume_corpus_learning_batch", "description": "Resume a paused full-corpus reading cycle."},
+    {"name": "submit_corpus_learning_analysis", "description": "Submit connected-AI topic-specific semantic observations and evidence-backed patterns."},
+    {"name": "validate_corpus_learning_analysis", "description": "Validate submitted learning evidence against source captions."},
+    {"name": "search_corpus_learning", "description": "Search validated language, humor, construction, explanation and storytelling banks independently."},
+    {"name": "validate_reference_evidence", "description": "Validate source IDs, exact quotes, timestamps, and duplicates."},
+    {"name": "create_session", "description": "Start a persistent, isolated workflow and retrieve current instructions."},
+    {"name": "get_session_context", "description": "Resume a workflow with its references, contexts, and saved artifacts."},
+    {"name": "update_session_context", "description": "Persist research, mapping, language, humor, prompt, and audit context."},
+    {"name": "refresh_session_instructions", "description": "Reload changed instructions and acknowledge their current hash."},
+    {"name": "save_outline", "description": "Save a requested outline in pending approval state."},
+    {"name": "approve_outline", "description": "Explicitly approve a saved outline."},
+    {"name": "get_approved_outline", "description": "Retrieve approved outline content for its session."},
+    {"name": "save_script", "description": "Save a requested script after deterministic evidence and duration checks."},
+    {"name": "validate_script", "description": "Check evidence, word count, duration estimate, and workflow consistency."},
+    {"name": "get_audit_report", "description": "Report actual source coverage, version status, artifacts, and limitations."}
+  ],
+  "user_config": {
+    "dataset_dir": {
+      "type": "directory",
+      "title": "Transcript folder",
+      "description": "Choose the local folder containing the original Markdown transcripts. The files stay outside this bundle and are not modified.",
+      "required": true,
+      "default": "C:\\factoholic\\scripts"
+    },
+    "state_dir": {
+      "type": "directory",
+      "title": "Local database folder",
+      "description": "Folder for the local SQLite index and workflow sessions.",
+      "required": true,
+      "default": "${HOME}/.factoholic-script-engine"
+    },
+    "instructions_file": {
+      "type": "file",
+      "title": "Master Instructions file",
+      "description": "Editable local Master Instructions file. The server reloads it and tracks its SHA-256 hash.",
+      "required": true,
+      "default": "C:\\factoholic\\MASTER_INSTRUCTIONS.md"
+    },
+    "dataset_creator": {
+      "type": "string",
+      "title": "Verified dataset creator (optional)",
+      "description": "Set only after confirming the provenance of every file whose missing creator metadata this attribution will cover. Needed to search humor references as FactoHolic when file metadata has no creator field.",
+      "required": false,
+      "default": ""
+    }
+  },
+  "compatibility": {
+    "platforms": ["win32", "darwin", "linux"],
+    "runtimes": {
+      "python": ">=3.11"
+    }
+  },
+  "keywords": ["MCP", "transcripts", "scriptwriting", "research", "Hindi", "Hinglish"],
+  "license": "MIT"
+}

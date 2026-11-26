@@ -1,0 +1,9 @@
+[project]
+name = "factoholic-script-engine-mcpb"
+version = "0.1.0"
+description = "Claude Desktop MCP Bundle entry point"
+requires-python = ">=3.11"
+dependencies = ["mcp>=2.2,<3"]
+
+[tool.uv]
+package = false

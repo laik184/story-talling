@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "factoholic-script-engine": {
+      "command": "C:\\factoholic\\.venv\\Scripts\\python.exe",
+      "args": ["-m", "factoholic_script_engine.server"],
+      "cwd": "C:\\factoholic",
+      "env": {
+        "FACTOHOLIC_DATASET_DIR": "C:\\factoholic\\scripts",
+        "FACTOHOLIC_STATE_DIR": "C:\\Users\\Administrator\\AppData\\Local\\factoholic-script-engine",
+        "FACTOHOLIC_MASTER_INSTRUCTIONS": "C:\\factoholic\\MASTER_INSTRUCTIONS.md",
+        "FACTOHOLIC_WORKFLOW_CONTRACT": "C:\\factoholic\\WORKFLOW_CONTRACT.md"
+      }
+    }
+  }
+}
